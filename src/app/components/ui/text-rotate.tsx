@@ -77,7 +77,6 @@ const TextRotate = forwardRef<TextRotateRef, TextRotateProps>(
 
     const splitIntoCharacters = (text: string): string[] => {
       if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
-        // @ts-expect-error – Intl.Segmenter not in all TS targets
         const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" })
         return Array.from(segmenter.segment(text), ({ segment }: any) => segment)
       }

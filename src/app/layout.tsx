@@ -1,23 +1,25 @@
-import type { Metadata } from "next";
-import { Bebas_Neue, Barlow_Condensed, DM_Sans } from "next/font/google";
+import { Outfit, Playfair_Display, Inter, Syncopate } from "next/font/google";
 import "./globals.css";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  variable: "--font-bebas",
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
 });
 
-const barlowCondensed = Barlow_Condensed({
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-barlow",
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  variable: "--font-playfair",
 });
 
-const dmSans = DM_Sans({
-  weight: ["400", "500", "700"],
-  variable: "--font-dm-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const syncopate = Syncopate({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-syncopate",
 });
 
 export const metadata: Metadata = {
@@ -33,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${bebasNeue.variable} ${barlowCondensed.variable} ${dmSans.variable} antialiased`}
+        className={`${outfit.variable} ${playfair.variable} ${inter.variable} ${syncopate.variable} antialiased`}
       >
         {children}
       </body>

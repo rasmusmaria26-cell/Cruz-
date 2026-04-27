@@ -147,13 +147,13 @@ const ScrollExpandMedia = ({
               </div>
 
               {/* Title text split */}
-              <div className={`flex items-center justify-center text-center gap-4 w-full relative z-10 flex-col ${textBlend ? 'mix-blend-difference' : ''}`}>
+              <div className="flex items-center justify-center text-center gap-2 w-full relative z-10 flex-col">
                 <motion.h2
-                  className="text-5xl md:text-8xl lg:text-9xl font-[var(--font-bebas)] uppercase tracking-wide text-white"
+                  className="text-[12vw] md:text-[10vw] font-hero text-shimmer uppercase tracking-[0.2em] leading-none whitespace-nowrap"
                   style={{ transform: `translateX(-${tx}vw)` }}
                 >{firstWord}</motion.h2>
                 <motion.h2
-                  className="text-5xl md:text-8xl lg:text-9xl font-[var(--font-bebas)] uppercase tracking-wide text-white text-center"
+                  className="text-[12vw] md:text-[10vw] font-hero text-shimmer uppercase tracking-[0.2em] leading-none text-center whitespace-nowrap"
                   style={{ transform: `translateX(${tx}vw)` }}
                 >{rest}</motion.h2>
               </div>

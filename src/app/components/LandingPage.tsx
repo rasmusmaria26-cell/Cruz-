@@ -122,19 +122,8 @@ export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const heroRef = useRef<HTMLDivElement>(null);
-  const howItWorksRef = useRef<HTMLDivElement>(null);
-
-  // Parallax Hooks
+  // Parallax Hooks (Removed unused vars)
   const { scrollY } = useScroll();
-  const yVideo = useTransform(scrollY, [0, 500], [0, 150]);
-  const yWave = useTransform(scrollY, [0, 500], [0, 80]);
-  const yContent = useTransform(scrollY, [0, 500], [0, 30]);
-
-  // How It Works Sticky Scroll
-  const { scrollYProgress: howItWorksProgress } = useScroll({
-    target: howItWorksRef,
-    offset: ["start start", "end end"]
-  });
 
   useEffect(() => {
     // Lock scroll during loader
@@ -217,7 +206,7 @@ export default function LandingPage() {
         )}
       </AnimatePresence>
 
-      <div className={`min-h-screen relative bg-[var(--bg-base)] text-[var(--text-primary)] font-[var(--font-dm-sans)] overflow-x-hidden`}>
+      <div className={`min-h-screen relative bg-[var(--bg-base)] text-[var(--text-primary)] font-sans overflow-x-hidden`}>
         
         {/* Navbar */}
         <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[var(--bg-base)]/90 backdrop-blur-md py-3 shadow-lg border-b border-white/5' : 'bg-transparent py-5'}`}>
@@ -225,7 +214,7 @@ export default function LandingPage() {
             <div className="flex items-center gap-3">
               <ShipWheel className="w-8 h-8 text-[var(--accent)]" />
               <div>
-                <h1 className="font-[var(--font-bebas)] text-3xl tracking-wider leading-none">CRUZE</h1>
+                <h1 className="font-display text-3xl tracking-wider leading-none">CRUZE</h1>
                 <p className="text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Marine Service</p>
               </div>
             </div>
@@ -263,7 +252,7 @@ export default function LandingPage() {
               <button className="absolute top-6 right-6" onClick={() => setMobileMenuOpen(false)}>
                 <X className="w-8 h-8 text-[var(--text-muted)]" />
               </button>
-              <div className="flex flex-col gap-8 text-center text-2xl font-[var(--font-barlow)]">
+              <div className="flex flex-col gap-8 text-center text-2xl font-serif">
                 {['Home', 'Services', 'Process', 'Contact'].map(item => (
                   <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)} className="hover:text-[var(--accent)] transition-colors">
                     {item}
@@ -278,8 +267,8 @@ export default function LandingPage() {
         <section id="home" className="relative overflow-hidden">
           <ScrollExpandMedia
             mediaType="video"
-            mediaSrc="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-the-sea-at-night-4609-large.mp4"
-            bgImageSrc="https://images.unsplash.com/photo-1504608524841-42584120d693?w=1920&q=80"
+            mediaSrc="/hero-video.mp4"
+            bgImageSrc="/hero-bg.jpg"
             title="CRUZE MARINE"
             date="Est. Tuticorin"
             scrollToExpand="Scroll to Explore"
@@ -297,7 +286,7 @@ export default function LandingPage() {
                 Tuticorin's Maritime Experts
               </motion.div>
 
-              <div className="text-[clamp(3rem,8vw,8rem)] leading-[0.9] font-[var(--font-bebas)] tracking-wide mb-4 text-white drop-shadow-2xl">
+              <div className="text-[clamp(3rem,8vw,8rem)] leading-[0.9] font-display tracking-wide mb-4 text-white drop-shadow-2xl">
                 <TextRotate
                   texts={["CREW MANNING", "COLLEGE ADMISSIONS", "COURSES BOOKING", "PASSPORT ONLINE"]}
                   mainClassName="justify-start text-[var(--accent)]"
@@ -307,7 +296,7 @@ export default function LandingPage() {
                 />
               </div>
 
-              <h3 className="text-2xl md:text-4xl font-[var(--font-barlow)] text-[var(--text-muted)] mb-6 uppercase tracking-widest">
+              <h3 className="text-2xl md:text-4xl font-serif text-[var(--text-muted)] mb-6 uppercase tracking-widest">
                 Your Gateway to a Maritime Career
               </h3>
 
@@ -337,7 +326,7 @@ export default function LandingPage() {
               viewport={{ once: true }}
               className="mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-[var(--font-barlow)] text-[var(--text-muted)] uppercase tracking-widest flex items-center gap-4">
+              <h2 className="text-4xl md:text-5xl font-serif text-[var(--text-muted)] uppercase tracking-widest flex items-center gap-4">
                 <span className="w-12 h-[1px] bg-[var(--accent)]"></span> What We Do
               </h2>
             </motion.div>
@@ -357,11 +346,11 @@ export default function LandingPage() {
                   transition={{ delay: i * 0.1 }}
                 >
                   <TiltCard className="bg-[var(--bg-card)] border-l-4 border-[var(--accent)] p-8 md:p-12 h-full hover:shadow-[0_0_30px_rgba(196,98,45,0.15)] transition-shadow cursor-default group relative overflow-hidden">
-                    <div className="absolute -top-10 -right-10 text-9xl font-[var(--font-bebas)] text-white/5 group-hover:text-white/10 transition-colors pointer-events-none">
+                    <div className="absolute -top-10 -right-10 text-9xl font-display text-white/5 group-hover:text-white/10 transition-colors pointer-events-none">
                       {service.num}
                     </div>
-                    <div className="text-5xl font-[var(--font-bebas)] text-[var(--accent)] mb-6">{service.num}</div>
-                    <h3 className="text-3xl font-[var(--font-barlow)] mb-4 text-white uppercase tracking-wider">{service.title}</h3>
+                    <div className="text-5xl font-display text-[var(--accent)] mb-6">{service.num}</div>
+                    <h3 className="text-3xl font-serif mb-4 text-white uppercase tracking-wider">{service.title}</h3>
                     <p className="text-[var(--text-muted)] mb-8 text-lg leading-relaxed">{service.desc}</p>
                     <a href="https://wa.me/919003354028" className="inline-flex items-center text-[var(--accent)] font-medium hover:text-[var(--accent-warm)] transition-colors group/link">
                       Enquire on WhatsApp <ChevronRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" />
@@ -393,7 +382,7 @@ export default function LandingPage() {
                   className="flex flex-col items-center md:items-start"
                 >
                   <item.icon className="w-16 h-16 text-[var(--accent)] mb-6 stroke-[1.5]" />
-                  <h3 className="text-2xl font-[var(--font-barlow)] uppercase tracking-wider mb-3">{item.title}</h3>
+                  <h3 className="text-2xl font-serif uppercase tracking-wider mb-3">{item.title}</h3>
                   <p className="text-[var(--text-muted)]">{item.desc}</p>
                 </motion.div>
               ))}
@@ -401,73 +390,72 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* How It Works - Sticky Scroll Section */}
-        <section id="process" ref={howItWorksRef} className="h-[400vh] relative bg-[var(--bg-surface)]">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(196,98,45,0.05)_0%,transparent_50%)] pointer-events-none" />
-          <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-            <div className="max-w-7xl mx-auto w-full px-6 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-              
-              <div className="md:w-5/12 flex flex-col h-full justify-center">
-                <h2 className="text-5xl md:text-8xl font-[var(--font-barlow)] uppercase tracking-widest mb-16 text-white drop-shadow-lg">
-                   Process
-                </h2>
-                
-                {/* Timeline Line */}
-                <div className="relative h-[50vh] w-2 bg-white/5 ml-6 rounded-full overflow-hidden shadow-inner">
-                  <motion.div 
-                    className="absolute top-0 left-0 w-full bg-gradient-to-b from-[var(--accent)] to-[var(--accent-warm)] shadow-[0_0_15px_rgba(196,98,45,0.8)]"
-                    style={{ height: useTransform(howItWorksProgress, [0, 1], ["0%", "100%"]) }}
-                  />
-                </div>
-              </div>
+        {/* How It Works - Vertical Timeline Section */}
+        <section id="process" className="py-32 px-6 relative bg-fixed bg-center bg-cover overflow-hidden" style={{ backgroundImage: "url('/process-bg.jpg')" }}>
+          {/* Heavy dark overlay so the timeline remains highly readable */}
+          <div className="absolute inset-0 bg-[var(--bg-base)]/90 backdrop-blur-[2px] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(196,98,45,0.1)_0%,transparent_60%)] pointer-events-none" />
+          
+          <div className="max-w-4xl mx-auto relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-24"
+            >
+              <h2 className="text-4xl md:text-6xl font-serif text-white uppercase tracking-widest mb-6 drop-shadow-lg">
+                Our Process
+              </h2>
+              <p className="text-xl text-[var(--text-muted)] max-w-2xl mx-auto drop-shadow-md">
+                A seamless, transparent journey from your first call to your final documentation.
+              </p>
+            </motion.div>
 
-              <div className="md:w-7/12 relative h-[60vh] flex items-center w-full">
-                {/* Step 1 */}
+            <div className="relative border-l border-white/10 md:border-l-0 md:border-none pl-8 md:pl-0">
+              {/* Center Line for Desktop */}
+              <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-x-1/2" />
+
+              {[
+                { 
+                  num: "01", 
+                  title: "Reach Out", 
+                  desc: "Call or WhatsApp us with your requirement. We provide a clear roadmap and checklist immediately." 
+                },
+                { 
+                  num: "02", 
+                  title: "Send Documents", 
+                  desc: "Share soft copies via WhatsApp or Email. We verify everything to ensure zero rejections." 
+                },
+                { 
+                  num: "03", 
+                  title: "We Handle It", 
+                  desc: "We process, submit, and confirm everything. You receive the final documents without the hassle." 
+                }
+              ].map((step, i) => (
                 <motion.div 
-                  className="absolute w-full"
-                  style={{ 
-                    opacity: useTransform(howItWorksProgress, [0, 0.15, 0.3, 0.35], [0, 1, 1, 0]),
-                    y: useTransform(howItWorksProgress, [0, 0.15, 0.3, 0.35], [80, 0, 0, -80]),
-                    scale: useTransform(howItWorksProgress, [0, 0.15, 0.3, 0.35], [0.9, 1, 1, 1.1])
-                  }}
+                  key={i}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ delay: i * 0.2 }}
+                  className={`relative flex flex-col md:flex-row items-start md:items-center justify-between mb-24 last:mb-0 ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}`}
                 >
-                  <div className="absolute -top-32 -left-10 text-[18rem] font-[var(--font-bebas)] text-white/5 pointer-events-none">01</div>
-                  <h3 className="text-[var(--accent)] text-2xl font-bold tracking-widest mb-4 font-[var(--font-barlow)] uppercase">Step 01</h3>
-                  <h4 className="text-5xl md:text-8xl font-[var(--font-bebas)] tracking-wide mb-8 text-white">Reach Out</h4>
-                  <p className="text-2xl text-[var(--text-muted)] max-w-xl leading-relaxed">Call or WhatsApp us with your requirement. We provide a clear roadmap and checklist immediately.</p>
-                </motion.div>
+                  {/* Timeline Dot */}
+                  <div className="absolute -left-[37px] md:static md:left-auto md:absolute md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-[var(--accent)] shadow-[0_0_15px_rgba(196,98,45,0.8)] z-10 border-2 border-[var(--bg-surface)]" />
 
-                {/* Step 2 */}
-                <motion.div 
-                  className="absolute w-full"
-                  style={{ 
-                    opacity: useTransform(howItWorksProgress, [0.35, 0.45, 0.65, 0.7], [0, 1, 1, 0]),
-                    y: useTransform(howItWorksProgress, [0.35, 0.45, 0.65, 0.7], [80, 0, 0, -80]),
-                    scale: useTransform(howItWorksProgress, [0.35, 0.45, 0.65, 0.7], [0.9, 1, 1, 1.1])
-                  }}
-                >
-                  <div className="absolute -top-32 -left-10 text-[18rem] font-[var(--font-bebas)] text-white/5 pointer-events-none">02</div>
-                  <h3 className="text-[var(--accent)] text-2xl font-bold tracking-widest mb-4 font-[var(--font-barlow)] uppercase">Step 02</h3>
-                  <h4 className="text-5xl md:text-8xl font-[var(--font-bebas)] tracking-wide mb-8 text-white">Send Documents</h4>
-                  <p className="text-2xl text-[var(--text-muted)] max-w-xl leading-relaxed">Share soft copies via WhatsApp or Email. We verify everything to ensure zero rejections.</p>
+                  <div className="md:w-[45%] text-left">
+                    <div className="text-8xl md:text-9xl font-display text-white/5 mb-[-40px] md:mb-[-60px] pointer-events-none select-none">
+                      {step.num}
+                    </div>
+                    <div className="bg-[var(--bg-card)] p-8 border border-white/5 relative z-10 hover:border-white/10 transition-colors">
+                      <h3 className="text-[var(--accent)] text-lg font-bold tracking-widest mb-2 font-serif uppercase">Step {step.num}</h3>
+                      <h4 className="text-3xl font-display tracking-wide mb-4 text-white uppercase">{step.title}</h4>
+                      <p className="text-lg text-[var(--text-muted)] leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                  <div className="hidden md:block md:w-[45%]" />
                 </motion.div>
-
-                {/* Step 3 */}
-                <motion.div 
-                  className="absolute w-full"
-                  style={{ 
-                    opacity: useTransform(howItWorksProgress, [0.7, 0.8, 1, 1], [0, 1, 1, 1]),
-                    y: useTransform(howItWorksProgress, [0.7, 0.8, 1, 1], [80, 0, 0, 0]),
-                    scale: useTransform(howItWorksProgress, [0.7, 0.8, 1, 1], [0.9, 1, 1, 1])
-                  }}
-                >
-                  <div className="absolute -top-32 -left-10 text-[18rem] font-[var(--font-bebas)] text-white/5 pointer-events-none">03</div>
-                  <h3 className="text-[var(--accent)] text-2xl font-bold tracking-widest mb-4 font-[var(--font-barlow)] uppercase">Step 03</h3>
-                  <h4 className="text-5xl md:text-8xl font-[var(--font-bebas)] tracking-wide mb-8 text-white">We Handle It</h4>
-                  <p className="text-2xl text-[var(--text-muted)] max-w-xl leading-relaxed">We process, submit, and confirm everything. You receive the final documents without the hassle.</p>
-                </motion.div>
-              </div>
-
+              ))}
             </div>
           </div>
         </section>
@@ -476,7 +464,7 @@ export default function LandingPage() {
         <section className="py-24 px-6 relative bg-[var(--bg-base)]">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(196,98,45,0.05)_0%,transparent_50%)] pointer-events-none" />
           <div className="max-w-7xl mx-auto relative z-10">
-            <h2 className="text-3xl md:text-4xl font-[var(--font-barlow)] text-[var(--text-muted)] uppercase tracking-widest text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif text-[var(--text-muted)] uppercase tracking-widest text-center mb-16">
               Trusted by Seafarers
             </h2>
             
@@ -499,7 +487,7 @@ export default function LandingPage() {
                   </div>
                   <p className="text-lg italic mb-8 text-white/90">"{t.text}"</p>
                   <div>
-                    <h4 className="font-bold tracking-wide uppercase font-[var(--font-barlow)]">{t.name}</h4>
+                    <h4 className="font-bold tracking-wide uppercase font-serif">{t.name}</h4>
                     <p className="text-sm text-[var(--text-muted)]">{t.role}</p>
                   </div>
                 </motion.div>
@@ -516,7 +504,7 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-[var(--font-barlow)] uppercase tracking-widest mb-8">
+              <h2 className="text-4xl md:text-5xl font-serif uppercase tracking-widest mb-8">
                 Get In Touch
               </h2>
               
@@ -575,7 +563,7 @@ export default function LandingPage() {
               className="bg-[var(--bg-card)] p-8 md:p-10 rounded-sm border border-[var(--border)] relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/10 blur-[50px] pointer-events-none" />
-              <h3 className="text-2xl font-[var(--font-barlow)] mb-6 uppercase tracking-wider text-white">Send a Message</h3>
+              <h3 className="text-2xl font-serif mb-6 uppercase tracking-wider text-white">Send a Message</h3>
               
               <form 
                 onSubmit={(e) => {
@@ -597,7 +585,7 @@ export default function LandingPage() {
                 </select>
                 <textarea required name="message" rows={4} placeholder="Your message..." className="w-full bg-[var(--bg-base)] border border-white/10 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-[var(--accent)] transition-colors resize-none" />
                 
-                <button type="submit" className="w-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-warm)] text-black font-bold py-4 rounded-sm hover:shadow-[0_0_20px_rgba(196,98,45,0.4)] transition-shadow tracking-wide mt-2 uppercase font-[var(--font-barlow)]">
+                <button type="submit" className="w-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-warm)] text-black font-bold py-4 rounded-sm hover:shadow-[0_0_20px_rgba(196,98,45,0.4)] transition-shadow tracking-wide mt-2 uppercase font-serif">
                   Submit via WhatsApp
                 </button>
               </form>
@@ -610,7 +598,7 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[var(--text-muted)]">
             <div className="flex items-center gap-2">
               <ShipWheel className="w-5 h-5 text-[var(--accent)]" />
-              <span className="font-[var(--font-bebas)] tracking-wider text-lg text-white">CRUZE</span>
+              <span className="font-display tracking-wider text-lg text-white">CRUZE</span>
             </div>
             <p>© {new Date().getFullYear()} Cruze Marine Service. Tuticorin.</p>
             <div className="flex gap-4">

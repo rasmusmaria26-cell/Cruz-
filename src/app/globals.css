@@ -20,24 +20,22 @@
   --color-text-primary: var(--text-primary);
   --color-text-muted: var(--text-muted);
   --color-border-custom: var(--border);
-  --font-bebas: var(--font-bebas);
-  --font-barlow: var(--font-barlow);
-  --font-dm-sans: var(--font-dm-sans);
+  
+  /* Font families mapped safely to avoid Next.js variable collision */
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --font-display: var(--font-outfit);
+  --font-hero: var(--font-syncopate);
 }
 
 body {
   background: var(--bg-base);
   color: var(--text-primary);
-  font-family: var(--font-dm-sans), sans-serif;
+  font-family: var(--font-sans), sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-barlow), sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
 }
 
 /* Water Ripple Effect */
@@ -50,6 +48,34 @@ h6 {
     transform: translate(-50%, -50%) scale(200); /* Will scale to 200px equivalent depending on base */
     opacity: 0;
   }
+}
+
+/* Shine animation for text */
+@keyframes shine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
+  animation: shine 3s linear infinite;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
 /* Pulse animation for WhatsApp FAB */
