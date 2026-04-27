@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Mail, ShipWheel, CheckCircle2, ChevronRight, Menu, X, Star } from "lucide-react";
+import { TextRotate } from "./ui/text-rotate";
+import ScrollExpandMedia from "./ui/scroll-expansion-hero";
 
 // --- Components ---
 
@@ -272,79 +274,57 @@ export default function LandingPage() {
           )}
         </AnimatePresence>
 
-        {/* Hero Section */}
-        <section id="home" ref={heroRef} onClick={handleHeroClick} className="relative h-screen flex items-center overflow-hidden cursor-crosshair">
-          {/* Layer 1: Video */}
-          <motion.div style={{ y: yVideo }} className="absolute inset-0 w-full h-[120%] -top-[10%] -z-30 bg-[var(--bg-card)]">
-            <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60">
-              <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-the-sea-at-night-4609-large.mp4" type="video/mp4" />
-            </video>
-          </motion.div>
+        {/* Hero Section — Scroll Expansion */}
+        <section id="home" className="relative overflow-hidden">
+          <ScrollExpandMedia
+            mediaType="video"
+            mediaSrc="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-the-sea-at-night-4609-large.mp4"
+            bgImageSrc="https://images.unsplash.com/photo-1504608524841-42584120d693?w=1920&q=80"
+            title="CRUZE MARINE"
+            date="Est. Tuticorin"
+            scrollToExpand="Scroll to Explore"
+            textBlend={true}
+          >
+            {/* Content revealed after scroll expansion */}
+            <div ref={heroRef} className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full text-xs uppercase tracking-widest text-[var(--text-muted)] bg-white/5 backdrop-blur-md mb-8"
+              >
+                <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+                Tuticorin's Maritime Experts
+              </motion.div>
 
-          {/* Layer 2: Wave Texture Overlay (simplified SVG wave) */}
-          <motion.div style={{ y: yWave }} className="absolute inset-0 w-full h-[120%] -top-[10%] opacity-20 -z-20 flex flex-col justify-end">
-             <svg viewBox="0 0 1440 320" className="w-full h-auto text-white fill-current">
-                <path fillOpacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-              </svg>
-          </motion.div>
+              <div className="text-[clamp(3rem,8vw,8rem)] leading-[0.9] font-[var(--font-bebas)] tracking-wide mb-4 text-white drop-shadow-2xl">
+                <TextRotate
+                  texts={["CREW MANNING", "COLLEGE ADMISSIONS", "COURSES BOOKING", "PASSPORT ONLINE"]}
+                  mainClassName="justify-start text-[var(--accent)]"
+                  staggerDuration={0.04}
+                  staggerFrom="first"
+                  rotationInterval={3000}
+                />
+              </div>
 
-          {/* Gradients & Noise */}
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--bg-base)]/30 via-[var(--bg-base)]/70 to-[var(--bg-base)]" />
-          <div className="absolute inset-0 -z-10 bg-noise opacity-4 mix-blend-overlay pointer-events-none" />
+              <h3 className="text-2xl md:text-4xl font-[var(--font-barlow)] text-[var(--text-muted)] mb-6 uppercase tracking-widest">
+                Your Gateway to a Maritime Career
+              </h3>
 
-          {/* Layer 3: Content */}
-          <motion.div style={{ y: yContent }} className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={!isLoading ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 border border-white/10 rounded-full text-xs uppercase tracking-widest text-[var(--text-muted)] bg-white/5 backdrop-blur-md mb-8"
-            >
-              <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-              Tuticorin's Maritime Experts
-            </motion.div>
+              <p className="text-lg md:text-xl text-[var(--text-muted)] max-w-2xl mb-10 leading-relaxed">
+                Crew Manning · College Admissions · Courses · Passport Services — from Tuticorin to the world's oceans.
+              </p>
 
-            <motion.h2 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={!isLoading ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-              className="text-[clamp(4rem,10vw,10rem)] leading-[0.85] font-[var(--font-bebas)] tracking-wide mb-4 text-white drop-shadow-2xl"
-            >
-              <ScrambleText text="CRUZE MARINE SERVICE" />
-            </motion.h2>
-
-            <motion.h3 
-              initial={{ opacity: 0, y: 20 }}
-              animate={!isLoading ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-2xl md:text-4xl font-[var(--font-barlow)] text-[var(--accent)] mb-6 uppercase tracking-widest"
-            >
-              Your Gateway to a Maritime Career
-            </motion.h3>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={!isLoading ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="text-lg md:text-xl text-[var(--text-muted)] max-w-2xl mb-10 leading-relaxed"
-            >
-              Crew Manning · College Admissions · Courses · Passport Services — from Tuticorin to the world's oceans.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={!isLoading ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="flex flex-wrap gap-4"
-            >
-              <MagneticButton href="#services" className="px-8 py-4 bg-[var(--accent)] hover:bg-[var(--accent-warm)] transition-colors text-black font-semibold rounded-sm tracking-wide">
-                Our Services
-              </MagneticButton>
-              <MagneticButton href="https://wa.me/919003354028" className="px-8 py-4 border border-[var(--border)] hover:border-[var(--accent)] transition-colors text-white font-semibold rounded-sm tracking-wide backdrop-blur-sm bg-white/5">
-                WhatsApp Us
-              </MagneticButton>
-            </motion.div>
-          </motion.div>
+              <div className="flex flex-wrap gap-4">
+                <MagneticButton href="#services" className="px-8 py-4 bg-[var(--accent)] hover:bg-[var(--accent-warm)] transition-colors text-black font-semibold rounded-sm tracking-wide">
+                  Our Services
+                </MagneticButton>
+                <MagneticButton href="https://wa.me/919003354028" className="px-8 py-4 border border-[var(--border)] hover:border-[var(--accent)] transition-colors text-white font-semibold rounded-sm tracking-wide backdrop-blur-sm bg-white/5">
+                  WhatsApp Us
+                </MagneticButton>
+              </div>
+            </div>
+          </ScrollExpandMedia>
         </section>
 
         {/* Services Section */}
