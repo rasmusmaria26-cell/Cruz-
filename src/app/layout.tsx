@@ -1,4 +1,4 @@
-import { Outfit, Playfair_Display, Inter, Syncopate } from "next/font/google";
+import { Outfit, Playfair_Display, Inter, Syncopate, Nunito } from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -20,6 +20,12 @@ const syncopate = Syncopate({
   weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-syncopate",
+});
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+  variable: "--font-nunito",
 });
 
 export const metadata: Metadata = {
