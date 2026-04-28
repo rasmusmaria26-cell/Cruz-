@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Mail, ShipWheel, CheckCircle2, ChevronRight, Menu, X, Star } from "lucide-react";
 import { GooeyText } from "./ui/gooey-text-morphing";
@@ -212,12 +213,8 @@ export default function LandingPage() {
         {/* Navbar */}
         <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[var(--bg-base)]/90 backdrop-blur-md py-3 shadow-lg border-b border-white/5' : 'bg-transparent py-5'}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <ShipWheel className="w-8 h-8 text-[var(--accent)]" />
-              <div>
-                <h1 className="font-[var(--font-nunito)] font-black text-lg sm:text-xl md:text-3xl tracking-tight leading-none">CRUZE</h1>
-                <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-[var(--text-muted)]">Marine Service</p>
-              </div>
+            <div className="flex items-center">
+              <Image src="/cruz-logo.png" alt="Cruze Marine Service" width={180} height={50} className="h-8 sm:h-10 md:h-12 w-auto object-contain" priority />
             </div>
 
             <nav className="hidden lg:flex gap-8 items-center text-sm font-medium tracking-wide">
@@ -290,8 +287,8 @@ export default function LandingPage() {
       Tuticorin's Maritime Experts
     </motion.div>
 
-    <div className="text-[clamp(2rem,8vw,8rem)] leading-[0.88] font-[var(--font-chivo-mono)] font-black tracking-[-0.02em] mb-4 text-white overflow-hidden">
-      <div className="relative h-24 md:h-32 w-full mt-2">
+    <div className="text-[clamp(2rem,8vw,8rem)] leading-[0.88] font-[var(--font-chivo-mono)] font-black tracking-[-0.02em] mb-4 text-white relative">
+      <div className="relative h-[120px] md:h-[180px] w-full mt-2">
           <GooeyText
             texts={["CREW MANNING", "COLLEGE ADMISSIONS", "COURSES BOOKING", "PASSPORT ONLINE"]}
             morphTime={1.2}
@@ -332,6 +329,9 @@ export default function LandingPage() {
 
         {/* Mobile Hero Section — Sparkles */}
         <div className="block md:hidden relative w-full bg-[var(--bg-base)] flex flex-col items-center justify-center overflow-hidden" style={{ minHeight: "100dvh" }}>
+          <div className="absolute inset-0 z-0" style={{ maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)" }}>
+            <Image src="/ocean-bg.png" alt="Background" fill className="object-cover opacity-20" priority />
+          </div>
           <div className="absolute inset-0 z-0 pointer-events-none">
             <SparklesCore
               id="tsparticlesmobile"
@@ -362,8 +362,8 @@ export default function LandingPage() {
       Tuticorin's Maritime Experts
     </motion.div>
 
-    <div className="text-[clamp(2rem,8vw,8rem)] leading-[0.88] font-[var(--font-chivo-mono)] font-black tracking-[-0.02em] mb-4 text-white overflow-hidden">
-      <div className="relative h-24 md:h-32 w-full mt-2">
+    <div className="text-[clamp(2rem,8vw,8rem)] leading-[0.88] font-[var(--font-chivo-mono)] font-black tracking-[-0.02em] mb-4 text-white relative">
+      <div className="relative h-[120px] md:h-[180px] w-full mt-2">
           <GooeyText
             texts={["CREW MANNING", "COLLEGE ADMISSIONS", "COURSES BOOKING", "PASSPORT ONLINE"]}
             morphTime={1.2}
@@ -682,9 +682,8 @@ export default function LandingPage() {
         {/* Footer */}
         <footer className="bg-[var(--bg-base)] border-t border-white/5 py-8 pb-28 md:pb-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-[var(--text-muted)]">
-            <div className="flex items-center gap-2">
-              <ShipWheel className="w-5 h-5 text-[var(--accent)]" />
-              <span className="font-[var(--font-nunito)] font-black tracking-tight text-lg text-white">CRUZE</span>
+            <div className="flex items-center">
+              <Image src="/cruz-logo.png" alt="Cruze Marine Service" width={120} height={32} className="h-6 sm:h-8 w-auto object-contain grayscale opacity-80" />
             </div>
             <p>© {new Date().getFullYear()} Cruze Marine Service. Tuticorin.</p>
             <div className="flex gap-4">

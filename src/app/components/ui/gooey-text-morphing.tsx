@@ -95,7 +95,7 @@ export function GooeyText({
     <div className={cn("relative h-full w-full flex items-center justify-start", className)}>
       <svg className="absolute h-0 w-0" aria-hidden="true" focusable="false">
         <defs>
-          <filter id="threshold">
+          <filter id="threshold" x="-50%" y="-50%" width="200%" height="200%">
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
