@@ -1,4 +1,5 @@
-import { Outfit, Playfair_Display, Inter, Syncopate, Nunito } from "next/font/google";
+import type { Metadata } from "next";
+import { Outfit, Playfair_Display, Inter, Syncopate, Nunito, Chivo_Mono } from "next/font/google";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -22,6 +23,13 @@ const syncopate = Syncopate({
   variable: "--font-syncopate",
 });
 
+const chivoMono = Chivo_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-chivo-mono",
+});
+
 const nunito = Nunito({
   subsets: ["latin"],
   weight: ["400", "600", "700", "800", "900"],
@@ -41,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${playfair.variable} ${inter.variable} ${syncopate.variable} antialiased`}
+        className={`${outfit.variable} ${playfair.variable} ${inter.variable} ${syncopate.variable} ${chivoMono.variable} ${nunito.variable} antialiased`}
       >
         {children}
       </body>
