@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Phone, MapPin, Mail, ShipWheel, CheckCircle2, ChevronRight, Menu, X, Star } from "lucide-react";
-import { TextRotate } from "./ui/text-rotate";
-import ParallaxStackHero from "./ui/ParallaxStackHero";
+import { GooeyText } from "./ui/gooey-text-morphing";
+import ScrollExpandMedia from "./ui/scroll-expansion-hero";
+import { SparklesCore } from "./ui/sparkles";
 
 // --- Components ---
 
@@ -264,15 +265,20 @@ export default function LandingPage() {
         </AnimatePresence>
 
         {/* Hero Section — Scroll Expansion */}
-        <ParallaxStackHero
-  title="CRUZE MARINE"
-  subtitle="Est. Tuticorin"
-  mediaSrc="/hero-video.mp4"
-  posterSrc="/hero-bg.jpg"
-  bgImageSrc="/hero-bg.jpg"
->
-  {/* This becomes Layer 3 content */}
-  <div ref={heroRef} onClick={handleHeroClick}>
+        
+        {/* Desktop Hero Section — Cinematic Scroll */}
+        <div className="hidden md:block">
+          <section id="home-desktop" className="relative overflow-hidden">
+            <ScrollExpandMedia
+              mediaType="video"
+              mediaSrc="/hero-video.mp4"
+              bgImageSrc="/hero-bg.jpg"
+              title="CRUZE MARINE"
+              date="Est. Tuticorin"
+              scrollToExpand="Scroll to Explore"
+              textBlend={true}
+            >
+              <div ref={heroRef} onClick={handleHeroClick}>
 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -285,14 +291,15 @@ export default function LandingPage() {
     </motion.div>
 
     <div className="text-[clamp(2rem,9vw,8rem)] leading-[0.88] font-[var(--font-nunito)] font-black tracking-[-0.03em] mb-4 text-white overflow-hidden text-shimmer">
-      <TextRotate
-        texts={["CREW MANNING","COLLEGE ADMISSIONS",
-                "COURSES BOOKING","PASSPORT ONLINE"]}
-        mainClassName="justify-start text-[var(--accent)]"
-        staggerDuration={0.04}
-        staggerFrom="first"
-        rotationInterval={3000}
-      />
+      <div className="relative h-24 md:h-32 w-full mt-2">
+          <GooeyText
+            texts={["CREW MANNING", "COLLEGE ADMISSIONS", "COURSES BOOKING", "PASSPORT ONLINE"]}
+            morphTime={1.2}
+            cooldownTime={2.5}
+            className="w-full h-full"
+            textClassName="text-[var(--accent)]"
+          />
+        </div>
     </div>
 
     <h3 className="text-sm sm:text-base md:text-2xl font-[var(--font-nunito)] font-semibold text-[var(--text-muted)] mb-4 sm:mb-6 uppercase tracking-[0.2em]">
@@ -319,7 +326,81 @@ export default function LandingPage() {
     </div>
 
   </div>
-</ParallaxStackHero>
+            </ScrollExpandMedia>
+          </section>
+        </div>
+
+        {/* Mobile Hero Section — Sparkles */}
+        <div className="block md:hidden relative w-full bg-[var(--bg-base)] flex flex-col items-center justify-center overflow-hidden" style={{ minHeight: "100dvh" }}>
+          <div className="absolute inset-0 z-0">
+            <SparklesCore
+              id="tsparticlesmobile"
+              background="transparent"
+              minSize={0.6}
+              maxSize={1.4}
+              particleDensity={100}
+              className="w-full h-full"
+              particleColor="#FFFFFF"
+              speed={1}
+            />
+          </div>
+          
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--bg-base)] to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--bg-base)] to-transparent pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(196,98,45,0.1)_0%,transparent_70%)] pointer-events-none z-10" />
+
+          <div className="relative z-20 w-full px-5 py-24 flex flex-col justify-center items-center text-center">
+            <div  >
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={!isLoading ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-full text-[10px] uppercase tracking-widest text-[var(--text-muted)] bg-white/5 backdrop-blur-md mb-6 sm:mb-8"
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+      Tuticorin's Maritime Experts
+    </motion.div>
+
+    <div className="text-[clamp(2rem,9vw,8rem)] leading-[0.88] font-[var(--font-nunito)] font-black tracking-[-0.03em] mb-4 text-white overflow-hidden text-shimmer">
+      <div className="relative h-24 md:h-32 w-full mt-2">
+          <GooeyText
+            texts={["CREW MANNING", "COLLEGE ADMISSIONS", "COURSES BOOKING", "PASSPORT ONLINE"]}
+            morphTime={1.2}
+            cooldownTime={2.5}
+            className="w-full h-full"
+            textClassName="text-[var(--accent)]"
+          />
+        </div>
+    </div>
+
+    <h3 className="text-sm sm:text-base md:text-2xl font-[var(--font-nunito)] font-semibold text-[var(--text-muted)] mb-4 sm:mb-6 uppercase tracking-[0.2em]">
+      Your Gateway to a Maritime Career
+    </h3>
+
+    <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-xl mb-8 leading-relaxed">
+      Crew Manning · College Admissions · Courses · Passport Services — from Tuticorin to the world's oceans.
+    </p>
+
+    <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+      <MagneticButton
+        href="#services"
+        className="w-full sm:w-auto px-7 py-4 min-h-[48px] bg-[var(--accent)] hover:bg-[var(--accent-warm)] transition-colors text-black font-semibold rounded-sm tracking-wide text-center"
+      >
+        Our Services
+      </MagneticButton>
+      <MagneticButton
+        href="https://wa.me/919003354028"
+        className="w-full sm:w-auto px-7 py-4 min-h-[48px] border border-[var(--border)] hover:border-[var(--accent)] transition-colors text-white font-semibold rounded-sm tracking-wide backdrop-blur-sm bg-white/5 text-center"
+      >
+        WhatsApp Us
+      </MagneticButton>
+    </div>
+
+  </div>
+          </div>
+        </div>
+
 
         {/* Services Section */}
         <section id="services" className="py-16 md:py-32 px-4 sm:px-6 relative bg-[var(--bg-base)]">
